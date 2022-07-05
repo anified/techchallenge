@@ -31,7 +31,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build & Push image
       run: |
-        docker build -t techchallenge-be:${{ github.sha }} .
-        docker push techchallenge-be:${{ github.sha }}
+        docker build -t anified/techchallenge-be:${{ github.sha }} .
+        docker push anified/techchallenge-be:${{ github.sha }}
         sed -i'' -e 's/change_ATMS_URL/${{ secrets.ATMS_URL }}/' -e 's/change_ATMS_HEADER_KEY/${{ secrets.ATMS_HEADER_KEY }}/' -e 's/change_ATMS_HEADER_VALUE/${{ secrets.ATMS_HEADER_VALUE }}/' deploy.yaml
         kubectl apply -f deploy.yaml
