@@ -23,11 +23,11 @@ spec:
             - containerPort: 8080
           env:
             - name: ATMS_URL
-              value: $ATMS_URL
+              value: change_ATMS_URL
             - name: ATMS_HEADER_KEY
-              value: $ATMS_HEADER_KEY
+              value: change_ATMS_HEADER_KEY
             - name: ATMS_HEADER_VALUE
-              value: $ATMS_HEADER_VALUE
+              value: change_ATMS_HEADER_VALUE
 ---
 apiVersion: v1
 kind: Service
