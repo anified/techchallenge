@@ -31,7 +31,7 @@ jobs:
       run: |
         docker build -t anified/techchallenge-be .
         docker push anified/techchallenge-be
-        sed -i -e 's/change_ATMS_URL/"${ATMS_URL}"/g ; s/change_ATMS_HEADER_KEY/"${ATMS_HEADER_KEY}"/g ; s/change_ATMS_HEADER_VALUE/"${ATMS_HEADER_VALUE}"/g' deploy.yaml
+        sed -i -e 's/change_ATMS_URL/${ATMS_URL}/g ; s/change_ATMS_HEADER_KEY/${ATMS_HEADER_KEY}/g ; s/change_ATMS_HEADER_VALUE/${ATMS_HEADER_VALUE}/g' deploy.yaml
         echo "$(cat deploy.yaml)"
       env:
         ATMS_URL: ${{ secrets.ATMS_URL }}
