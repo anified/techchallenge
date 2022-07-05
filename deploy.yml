@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techchallenge-gke
+  labels:
+    app: techchallenge
+spec:
+  selector:
+    matchLabels:
+      app: techchallenge
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: techchallenge
+    spec:
+      containers:
+        - name: techchallenge-gke
+          image: anified/techchallenge:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ATMS_URL
+              value: change_me
+            - name: ATMS_HEADER_KEY
+              value: change_me
+            - name: ATMS_HEADER_VALUE
+              value: change_me
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: techchallenge-gke
+spec:
+  selector:
+    app: techchallenge
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer
