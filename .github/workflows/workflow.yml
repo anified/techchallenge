@@ -33,5 +33,11 @@ jobs:
       run: |
         docker build -t anified/techchallenge-be:${{ github.sha }} .
         docker push anified/techchallenge-be:${{ github.sha }}
-        sed -i 's/change_ATMS_URL/${{ secrets.ATMS_URL }}/g' 's/change_ATMS_HEADER_KEY/${{ secrets.ATMS_HEADER_KEY }}/g' 's/change_ATMS_HEADER_VALUE/${{ secrets.ATMS_HEADER_VALUE }}/g' deploy.yaml
-        kubectl apply -f deploy.yaml
+    - name: Replace config
+      uses: ./.github/actions/replace
+      with:
+        files: deploy.yaml
+        replacements: '$ATMS_URL=${{ secrets.ATMS_URL }},$ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},$ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
+    - name: Apply config
+      uses: steebchen/kubectl@master
+      run: kubectl apply -f deploy.yaml
