@@ -17,17 +17,17 @@ spec:
     spec:
       containers:
         - name: techchallenge-be
-          image: anified/techchallenge:latest
+          image: anified/techchallenge-be:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
             - name: ATMS_URL
-              value: change_me
+              value: change_ATMS_URL
             - name: ATMS_HEADER_KEY
-              value: change_me
+              value: change_ATMS_HEADER_KEY
             - name: ATMS_HEADER_VALUE
-              value: change_me
+              value: change_ATMS_HEADER_VALUE
 ---
 apiVersion: v1
 kind: Service

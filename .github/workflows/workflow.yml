@@ -1,13 +1,14 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Tech Challenge CI/CD Pipepline
 
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow-dispatch:
 
 jobs:
   build:
@@ -16,11 +17,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK 12
       uses: actions/setup-java@v3
       with:
-        java-version: '11'
+        java-version: '12'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Build & Push image
+      run: |
+        docker build -t techchallenge-be:${{ github.sha }} .
+        docker push techchallenge-be:${{ github.sha }}
+        sed -i'' -e 's/change_ATMS_URL/${{ secrets.ATMS_URL }}/' -e 's/change_ATMS_HEADER_KEY/${{ secrets.ATMS_HEADER_KEY }}/' -e 's/change_ATMS_HEADER_VALUE/${{ secrets.ATMS_HEADER_VALUE }}/' deploy.yaml
+        kubectl apply -f deploy.yaml
