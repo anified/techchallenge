@@ -31,12 +31,13 @@ jobs:
       run: |
         docker build -t anified/techchallenge-be .
         docker push anified/techchallenge-be
-        sed -i 's/change_ATMS_URL/${ATMS_URL}/g' deploy.yaml
-        echo "$(cat deploy.yaml)"
-      env:
-        ATMS_URL: ${{ secrets.ATMS_URL }}
-        ATMS_HEADER_KEY: ${{ secrets.ATMS_HEADER_KEY }}
-        ATMS_HEADER_VALUE: ${{ secrets.ATMS_HEADER_VALUE }}
+    - name: Find and Replace
+        uses: datamonsters/replace-action
+        with:
+          files: deploy.yaml
+          replacements: 'change_ATMS_URL=${{ secrets.ATMS_URL }},change_ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},change_ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
+    - name: Build & Push image
+      run: echo "$(cat deploy.yaml)"
 
   deploy:
     needs: build
