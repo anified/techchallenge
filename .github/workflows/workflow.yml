@@ -39,5 +39,4 @@ jobs:
         files: deploy.yaml
         replacements: '$ATMS_URL=${{ secrets.ATMS_URL }},$ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},$ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
     - name: Apply config
-      uses: steebchen/kubectl@master
       run: kubectl apply -f deploy.yaml
