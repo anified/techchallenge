@@ -36,7 +36,8 @@ jobs:
       with:
         files: deploy.yaml
         replacements: 'change_ATMS_URL=${{ secrets.ATMS_URL }},change_ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},change_ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
-
+    - name: Echo
+      run: echo "$(cat deploy.yaml)"
   deploy:
     needs: build
     runs-on: ubuntu-latest
