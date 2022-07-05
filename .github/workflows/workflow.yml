@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -39,3 +37,18 @@ jobs:
         ATMS_URL: ${{ secrets.ATMS_URL }}
         ATMS_HEADER_KEY: ${{ secrets.ATMS_HEADER_KEY }}
         ATMS_HEADER_VALUE: ${{ secrets.ATMS_HEADER_VALUE }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: kubectl - Google Cloud GKE cluster
+      uses: ameydev/gke-kubectl-action@master
+      env:
+        PROJECT_ID: ${{ secrets.GKE_PROJECT_ID }}
+        APPLICATION_CREDENTIALS: ${{ secrets.GKE_SA_KEY }}
+        CLUSTER_NAME: cluster-techchallenge-1
+        ZONE_NAME: us-central1-c
+      with:
+        args: apply -f deploy.yaml
