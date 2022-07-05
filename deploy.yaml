@@ -23,11 +23,11 @@ spec:
             - containerPort: 8080
           env:
             - name: ATMS_URL
-              value: change_ATMS_URL
+              value: https://open-atms.airlab.aero/api/v1/
             - name: ATMS_HEADER_KEY
-              value: change_ATMS_HEADER_KEY
+              value: api-key
             - name: ATMS_HEADER_VALUE
-              value: change_ATMS_HEADER_VALUE
+              value: G9Tw58HE6HDzyq94HFmnd2yOymAuU32k2mEgL3oTVbhLl6E1opu5Hqxb5BASwCWv
 ---
 apiVersion: v1
 kind: Service
