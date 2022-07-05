@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: techchallenge-gke
+  name: techchallenge-be
   labels:
     app: techchallenge
 spec:
@@ -16,7 +16,7 @@ spec:
         app: techchallenge
     spec:
       containers:
-        - name: techchallenge-gke
+        - name: techchallenge-be
           image: anified/techchallenge:latest
           imagePullPolicy: Always
           ports:
@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: techchallenge-gke
+  name: techchallenge-be
 spec:
   selector:
     app: techchallenge
