@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: techchallenge-be
-          image: anified/techchallenge-be:latest
+          image: anified/techchallenge-be:change_LABELTAG
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

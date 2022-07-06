@@ -29,8 +29,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build & Push image
       run: |
-        docker build -t anified/techchallenge-be .
-        docker push anified/techchallenge-be
+        docker build -t anified/techchallenge-be:${{ github.sha }} .
+        docker push anified/techchallenge-be:${{ github.sha }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
       uses: datamonsters/replace-action@v2
       with:
         files: deploy.yaml
-        replacements: 'change_ATMS_URL=${{ secrets.ATMS_URL }},change_ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},change_ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
+        replacements: 'change_ATMS_URL=${{ secrets.ATMS_URL }},change_ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},change_ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }},change_LABELTAG=${{ github.sha }}'
     - name: kubectl - Google Cloud GKE cluster
       uses: ameydev/gke-kubectl-action@master
       env:
