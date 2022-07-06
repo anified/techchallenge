@@ -39,7 +39,6 @@ public class AirportService {
 
     public AirportDto[] getAirports() {
         String url = this.url + "airac/airports";
-        System.out.println("Calling " + url);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<AirportDto[]> response = restTemplate.exchange(url, HttpMethod.GET, this._getHttpEntity(), AirportDto[].class);
         AirportDto[] result = response.getBody();

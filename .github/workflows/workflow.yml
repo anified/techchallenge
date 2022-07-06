@@ -36,14 +36,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Replace image in config
+    - name: Replace config in image
       uses: datamonsters/replace-action@v2
       with:
         files: deploy.yaml
         replacements: 'change_ATMS_URL=${{ secrets.ATMS_URL }},change_ATMS_HEADER_KEY=${{ secrets.ATMS_HEADER_KEY }},change_ATMS_HEADER_VALUE=${{ secrets.ATMS_HEADER_VALUE }}'
-    - name: Echo
-      run: |
-        echo "$(cat deploy.yaml)"
     - name: kubectl - Google Cloud GKE cluster
       uses: ameydev/gke-kubectl-action@master
       env:
