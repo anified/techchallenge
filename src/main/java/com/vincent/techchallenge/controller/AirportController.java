@@ -30,7 +30,7 @@ public class AirportController {
     @GetMapping(path = "/getSIDTopWaypoints/{icao}", produces = "application/json")
     public ResponseEntity<TopWaypointsDto> getSIDTopWaypoints(@PathVariable String icao) {
         SIDSTARDto[] SIDs = airportService.getStandardInstrumentDepartureByIcao(icao);
-        TopWaypointsDto topTwoWaypoints = airportService.getTopTwoWaypoints(icao, SIDs);
+        TopWaypointsDto topTwoWaypoints = airportService.getTopWaypoints(icao, SIDs);
 
         return new ResponseEntity<TopWaypointsDto>(topTwoWaypoints, HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class AirportController {
     @GetMapping(path = "/getSTARTopWaypoints/{icao}", produces = "application/json")
     public ResponseEntity<TopWaypointsDto> getSTARTopWaypoints(@PathVariable String icao) {
         SIDSTARDto[] SIDs = airportService.getStandardTerminalArrivalRouteByIcao(icao);
-        TopWaypointsDto topTwoWaypoints = airportService.getTopTwoWaypoints(icao, SIDs);
+        TopWaypointsDto topTwoWaypoints = airportService.getTopWaypoints(icao, SIDs);
 
         return new ResponseEntity<TopWaypointsDto>(topTwoWaypoints, HttpStatus.OK);
     }

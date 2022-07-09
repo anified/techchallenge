@@ -64,7 +64,7 @@ public class AirportService {
         return result;
     }
 
-    public TopWaypointsDto getTopTwoWaypoints(String icao, SIDSTARDto[] SIDs) {
+    public TopWaypointsDto getTopWaypoints(String icao, SIDSTARDto[] SIDs) {
         TopWaypointsDto result = new TopWaypointsDto();
         // Return airport icao
         result.setAirport(icao);
