@@ -4,8 +4,8 @@ This project was generated with Spring Boot [Spring Initializr](https://start.sp
 
 ## Prerequisites
 
-JDK version >= 11
-Maven
+- JDK version >= 11
+- Maven
 
 ## Project Structure
 
