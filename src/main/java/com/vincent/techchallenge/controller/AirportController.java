@@ -16,7 +16,7 @@ import com.vincent.techchallenge.service.AirportService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/techchallenge/v0")
+@RequestMapping("/techchallenge/v1")
 public class AirportController {
     @Autowired
     AirportService airportService;
